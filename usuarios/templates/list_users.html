@@ -1,0 +1,27 @@
+{% extends './base/base.html' %}
+{% load static %}
+
+{% block title %}Usuarios - GuaAdis{% endblock %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'usuarios/usuarios.css' %}">
+{% endblock %}
+{% block content %}
+    <h1>Usuarios</h1>
+    <div class="d-flex justify-content-center align-center flex-direction-row flex-wrap container-products w-100">
+        {% for user in users %}
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{user.nombre.title }} {{user.apellido.title }}</h5>
+                </div>
+                <ul class="list-group list-group-flush bg-dark">
+                    <li class="list-group-item bg-dark text-light text-center">Usuario: {{ user.usuario }}</li>
+                    <li class="list-group-item bg-dark text-light text-center">Contraseña: {{ user.password }}</li>
+                    <li class="list-group-item bg-dark text-light text-center">Tel: {{ user.telefono }}</li>
+                </ul>
+                <div id="edit_user_{{user.id}}" class="card-body d-flex justify-content-center align-center text-info font-weight-bold edit_user">
+                    Editar
+                </div>
+              </div>
+        {% endfor %}
+    </div>
+{% endblock %}

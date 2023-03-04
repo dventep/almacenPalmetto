@@ -1,0 +1,41 @@
+#navbarSupportedContent {
+    ul {
+        gap: 2vw;
+    }
+}
+
+.nav-li-contained {
+    padding: auto 4vw;
+}
+.nav-li-contained.actived {
+    font-weight: bold;
+    background-color: white !important;
+}
+.nav-li-contained a {
+    color: white !important;
+}
+.nav-li-contained.actived a {
+    color: black !important;
+}
+
+.about-user .px-3:nth-child(odd) {
+    border-right: solid 2px white;
+}
+
+.logout-container {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
+.logout-container:hover {
+    text-decoration: none;
+    color: white;
+    font-style: italic;
+}
+
+.container-actions div {
+    padding: 0 2vw;
+}
+.container-actions div:nth-child(even) {
+    border-left: solid 2px black;
+}

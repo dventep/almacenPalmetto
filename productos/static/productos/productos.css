@@ -1,0 +1,9 @@
+.container-products {
+    gap:2vw;
+}
+.edit_product, .delete_product{
+    cursor:pointer
+}
+.edit_product:hover, .delete_product:hover {
+    font-style:italic ;
+}

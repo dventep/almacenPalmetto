@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Ingresar - GuaAdis{% endblock %}
+{% block content %}
+    <h1>Ingreso</h1>
+    {% if request.session.login %}
+        <h3>Ya ha iniciado sesión</h3>
+    {% else %}
+        {% if request.session.no_found %}
+            <h3>Usuario no encontrado, por favor ingrese un usuario existente</h3>
+        {% endif %}
+        <form action="" method="post">
+            {% csrf_token %}
+            <div>
+                Usuario: <input type="text" name="usuario" id="usuario" required>
+                Password: <input type="password" name="password" id="password" required>
+            </div>
+            <input type="submit" value="Enviar">
+        </form>
+    {% endif %}
+{% endblock %}

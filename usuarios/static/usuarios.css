@@ -1,0 +1,9 @@
+.container-users {
+    gap:2vw;
+}
+.edit_user{
+    cursor:pointer
+}
+.edit_user:hover {
+    font-style:italic ;
+}
