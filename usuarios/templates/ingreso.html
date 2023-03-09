@@ -2,20 +2,32 @@
 
 {% block title %}Ingresar - GuaAdis{% endblock %}
 {% block content %}
-    <h1>Ingreso</h1>
-    {% if request.session.login %}
-        <h3>Ya ha iniciado sesión</h3>
-    {% else %}
-        {% if request.session.no_found %}
-            <h3>Usuario no encontrado, por favor ingrese un usuario existente</h3>
-        {% endif %}
-        <form action="" method="post">
-            {% csrf_token %}
-            <div>
-                Usuario: <input type="text" name="usuario" id="usuario" required>
-                Password: <input type="password" name="password" id="password" required>
-            </div>
-            <input type="submit" value="Enviar">
-        </form>
-    {% endif %}
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <h1>Ingreso</h1>
+            {% if request.session.login %}
+                <h3>Ya ha iniciado sesión</h3>
+            {% else %}
+                {% if request.session.no_found %}
+                    <h3>Usuario no encontrado, por favor ingrese un usuario existente</h3>
+                {% endif %}
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control-plaintext" name="usuario" id="usuario" required>
+                    </div>
+                    </div>
+                    <div class="form-group row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password" id="password" required>
+                    </div>
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Ingresar">
+                </form>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

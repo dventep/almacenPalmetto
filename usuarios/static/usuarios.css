@@ -1,9 +1,9 @@
 .container-users {
     gap:2vw;
 }
-.edit_user{
+.edit_user, .delete_user{
     cursor:pointer
 }
-.edit_user:hover {
+.edit_user:hover, .delete_user:hover {
     font-style:italic ;
 }

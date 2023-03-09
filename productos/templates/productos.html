@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="{% static 'productos/productos.css' %}">
 {% endblock %}
 {% block content %}
-    <h1>Productos</h1>
+    <h1>Productos - 
+        <button id="goToProduct" type="button" class="btn btn-primary btn-sm">Crear registro</button>
+    </h1>
     <div class="d-flex justify-content-center align-center flex-direction-row flex-wrap container-products w-100">
         {% for product in products %}
             <!-- <li>{{ product.nombre }} - {{ product.descripcion }} - {{ product.precio }}</li> -->
@@ -17,6 +19,7 @@
                 </div>
                 <ul class="list-group list-group-flush bg-dark">
                     <li class="list-group-item bg-dark text-light text-right">${{ product.precio }}</li>
+                    <li class="list-group-item bg-dark text-light text-right">Cantidad: {{ product.inventario }}</li>
                 </ul>
                 <div class="card-body d-flex justify-content-center align-center container-actions">
                     <div id="edit_product_{{product.id}}" class="text-info font-weight-bold edit_product">
@@ -29,4 +32,6 @@
               </div>
         {% endfor %}
     </div>
+    
+    <script src="{% static 'productos/product.js' %}"></script>
 {% endblock %}
