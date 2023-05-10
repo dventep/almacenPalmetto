@@ -4,6 +4,8 @@ from django.template.loader import render_to_string
 from django.http import HttpResponse, JsonResponse
 import requests
 # Create your views here.
+url_connect = "localhost"
+url_connect = "vmclient.brazilsouth.cloudapp.azure.com"
 def make_request_get(url, params={}):
     if params:
         response = requests.get("{}/{}" .format(url, "/".join(params)))
@@ -49,7 +51,7 @@ def home(request):
             Esta función trae todos los productos.
     """
     if 'login' in request.session:
-        request_to_api = make_request_get("http://localhost:3000/productos")
+        request_to_api = make_request_get(f"http://{url_connect}:3000/productos")
         productos_list = []
         if request_to_api:
             productos_list = request_to_api
@@ -102,7 +104,7 @@ def createProduct(request):
                 'inventario': request.POST.get('inventory_product')
             }
             print('to_send',json_to_send)
-            request_to_api = make_request_post("http://{url_connect}:3000/productos", json_to_send)
+            request_to_api = make_request_post(f"http://{url_connect}:3000/productos", json_to_send)
             if not request_to_api:
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
@@ -125,7 +127,7 @@ def putProduct(request):
                 'precio': request.POST.get('price_product'),
                 'inventario': request.POST.get('inventory_product')
             }
-            request_to_api = make_request_put("http://{url_connect}:3000/productos/{}" .format(request.POST.get('id')), json_to_send)
+            request_to_api = make_request_put("http://{}:3000/productos/{}" .format(url_connect, request.POST.get('id')), json_to_send)
             if not request_to_api:
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
@@ -147,7 +149,7 @@ def deleteProduct(request):
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
             content_return['error'].append('No se recibió el ID adecuado.')
-        # request_to_api = make_request_delete("http://localhost:3000/productos")
+        # request_to_api = make_request_delete(f"http://{url_connect}:3000/productos")
         # productos_list = []
         # if request_to_api:
         #     productos_list = request_to_api

@@ -4,6 +4,8 @@ from django.http import HttpResponse, JsonResponse
 import traceback
 import requests
 
+url_connect = "localhost"
+url_connect = "vmclient.brazilsouth.cloudapp.azure.com"
 def make_request_get(url, params=False):
     if params:
         response = requests.get("{}/{}" .format(url, "/".join(params)))
@@ -55,7 +57,7 @@ def login(request):
         #     return redirect('/')
         if request.POST:
             data_to_send = [request.POST.get('usuario', ''), request.POST.get('password', '')]
-            login_to_api = make_request_get("http://localhost:3000/user", params=data_to_send)
+            login_to_api = make_request_get(f"http://{url_connect}:3000/user", params=data_to_send)
             if login_to_api:
                 request.session['login'] = {
                     'usuario': login_to_api.get('usuario'),
@@ -79,7 +81,7 @@ def list_users(request):
             Esta función nos trae la lista de usuarios.
     """
     if 'login' in request.session:
-        request_to_api = make_request_get("http://localhost:3000/user")
+        request_to_api = make_request_get(f"http://{url_connect}:3000/user")
         users_list = []
         if request_to_api:
             users_list = request_to_api
@@ -108,7 +110,7 @@ def getUser(request):
     if 'login' in request.session:
         if 'edit_user_' in request.POST['id'] and len(request.POST['id'].split('edit_user_')) > 0:
             id_to_send = (request.POST['id'].split('edit_user_'))[1]
-            request_to_api = make_request_get(f"http://localhost:3000/user/{id_to_send}")
+            request_to_api = make_request_get(f"http://{url_connect}:3000/user/{id_to_send}")
             if request_to_api:
                 user_info = request_to_api
         # if request_to_api:
@@ -145,7 +147,7 @@ def createUser(request):
                 'email': request.POST.get('email_user')
             }
             print('to_send',json_to_send)
-            request_to_api = make_request_post("http://localhost:3000/user", json_to_send)
+            request_to_api = make_request_post(f"http://{url_connect}:3000/user", json_to_send)
             if not request_to_api:
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
@@ -170,7 +172,7 @@ def putUser(request):
                 'telefono': request.POST.get('telephone_user'),
                 'email': request.POST.get('email_user')
             }
-            request_to_api = make_request_put("http://localhost:3000/user/{}" .format(request.POST.get('id')), json_to_send)
+            request_to_api = make_request_put("http://{}:3000/user/{}" .format(url_connect, request.POST.get('id')), json_to_send)
             if not request_to_api:
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
@@ -187,12 +189,12 @@ def deleteUser(request):
     if 'login' in request.session:
         if 'delete_user_' in request.POST['id'] and len(request.POST['id'].split('delete_user_')) > 0:
             id_to_send = (request.POST['id'].split('delete_user_'))[1]
-            request_to_api = make_request_delete(f"http://localhost:3000/user/{id_to_send}")
+            request_to_api = make_request_delete(f"http://{url_connect}:3000/user/{id_to_send}")
             if not request_to_api:
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
             content_return['error'].append('No se recibió el ID adecuado.')
-        # request_to_api = make_request_delete("http://localhost:3000/user")
+        # request_to_api = make_request_delete(f"http://{url_connect}:3000/user")
         # useros_list = []
         # if request_to_api:
         #     useros_list = request_to_api
