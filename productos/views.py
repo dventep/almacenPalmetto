@@ -67,7 +67,7 @@ def getProduct(request):
     if 'login' in request.session:
         if 'edit_product_' in request.POST['id'] and len(request.POST['id'].split('edit_product_')) > 0:
             id_to_send = (request.POST['id'].split('edit_product_'))[1]
-            request_to_api = make_request_get(f"http://localhost:3000/productos/{id_to_send}")
+            request_to_api = make_request_get(f"http://{url_connect}:3000/productos/{id_to_send}")
             if request_to_api:
                 product_info = request_to_api
         # if request_to_api:
@@ -102,7 +102,7 @@ def createProduct(request):
                 'inventario': request.POST.get('inventory_product')
             }
             print('to_send',json_to_send)
-            request_to_api = make_request_post("http://localhost:3000/productos", json_to_send)
+            request_to_api = make_request_post("http://{url_connect}:3000/productos", json_to_send)
             if not request_to_api:
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
@@ -125,7 +125,7 @@ def putProduct(request):
                 'precio': request.POST.get('price_product'),
                 'inventario': request.POST.get('inventory_product')
             }
-            request_to_api = make_request_put("http://localhost:3000/productos/{}" .format(request.POST.get('id')), json_to_send)
+            request_to_api = make_request_put("http://{url_connect}:3000/productos/{}" .format(request.POST.get('id')), json_to_send)
             if not request_to_api:
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
@@ -142,7 +142,7 @@ def deleteProduct(request):
     if 'login' in request.session:
         if 'delete_product_' in request.POST['id'] and len(request.POST['id'].split('delete_product_')) > 0:
             id_to_send = (request.POST['id'].split('delete_product_'))[1]
-            request_to_api = make_request_delete(f"http://localhost:3000/productos/{id_to_send}")
+            request_to_api = make_request_delete(f"http://{url_connect}:3000/productos/{id_to_send}")
             if not request_to_api:
                 content_return['error'].append('Durante el proceso surgió un error.')
         else:
