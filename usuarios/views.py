@@ -5,7 +5,7 @@ import traceback
 import requests
 
 url_connect = "localhost"
-url_connect = "vmclient.brazilsouth.cloudapp.azure.com"
+url_connect = "vmserver1.brazilsouth.cloudapp.azure.com"
 def make_request_get(url, params=False):
     if params:
         response = requests.get("{}/{}" .format(url, "/".join(params)))
